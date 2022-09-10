@@ -11,8 +11,14 @@ namespace Homework1_3_1
         static void Main(string[] args)
         {
             Random random = new Random();
-            int countRows = random.Next(2, 5);
-            int countColumns = random.Next(2, 5);
+            int countRowsMax = 4;
+            int countRowsMin = 2;
+            int countColumnsMax = 4;
+            int countColumnsMin = 2;
+            int randomNumberMin = 0;
+            int randomNumberMax = 9;
+            int countRows = random.Next(countRowsMin, countRowsMax+1);
+            int countColumns = random.Next(countColumnsMin, countColumnsMax+1);
             int productFirstColumn=1;
             int sumSecondRow = 0;
             int firstColumn = 0;
@@ -23,8 +29,18 @@ namespace Homework1_3_1
             {
                 for (int column = 0; column < array.GetLength(1); column++)
                 {
-                    array[row, column] = random.Next(0, 10);
+                    array[row, column] = random.Next(randomNumberMin, randomNumberMax+1);
                 }
+            }
+
+            for (int column=0; column < array.GetLength(1); column++)
+            {
+                sumSecondRow += array[secondRow, column];
+            }
+
+            for (int row = 0; row < array.GetLength(0); row++)
+            {
+                productFirstColumn *= array[row, firstColumn];
             }
 
             for (int row = 0; row < array.GetLength(0); row++)
@@ -32,16 +48,6 @@ namespace Homework1_3_1
                 for (int column = 0; column < array.GetLength(1); column++)
                 {
                     Console.Write(array[row, column] + " ");
-
-                    if (row == secondRow)
-                    {
-                        sumSecondRow += array[row, column];
-                    }
-
-                    if (column== firstColumn)
-                    {
-                        productFirstColumn*=array[row, column];
-                    }
                 }
 
                 Console.WriteLine();
